@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"log"
-	"os"
 
 	"deployly-cache/cli/internal/archive"
 	"deployly-cache/cli/internal/client"

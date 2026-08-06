@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"time"
@@ -8,7 +9,6 @@ import (
 	"deployly-cache/api/internal/auth"
 	"deployly-cache/api/internal/storage"
 
-	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

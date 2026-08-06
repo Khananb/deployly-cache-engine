@@ -1,9 +1,7 @@
 package cmd
 
 import (
-	"bytes"
 	"fmt"
-	"io"
 	"log"
 	"os"
 
