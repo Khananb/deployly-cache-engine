@@ -1,0 +1,40 @@
+name: 'Deployly Cache'
+description: 'High-performance CI/CD caching for Go, Node.js, and more'
+inputs:
+  path:
+    description: 'Path to the directory to cache'
+    required: true
+  lockfile:
+    description: 'Path to the lockfile to hash (e.g., go.sum, package-lock.json)'
+    required: true
+  prefix:
+    description: 'Optional prefix for the cache key'
+    required: false
+    default: 'deployly'
+  url:
+    description: 'Deployly API URL'
+    required: true
+  key:
+    description: 'Deployly API Key'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore Cache
+      shell: bash
+      env:
+        DEPLOYLY_URL: ${{ inputs.url }}
+        DEPLOYLY_KEY: ${{ inputs.key }}
+      run: |
+        chmod +x ${{ github.action_path }}/run.sh
+        ${{ github.action_path }}/run.sh restore "${{ inputs.path }}" "${{ inputs.lockfile }}" "${{ inputs.prefix }}"
+
+    - name: Save Cache
+      if: success()
+      shell: bash
+      env:
+        DEPLOYLY_URL: ${{ inputs.url }}
+        DEPLOYLY_KEY: ${{ inputs.key }}
+      run: |
+        ${{ github.action_path }}/run.sh save "${{ inputs.path }}" "${{ inputs.lockfile }}" "${{ inputs.prefix }}"
