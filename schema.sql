@@ -1,4 +1,4 @@
-# Deployly Cache Engine: Database Schema
+-- Deployly Cache Engine: Database Schema
 
 -- Enable UUID extension for secure, non-sequential identifiers
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
