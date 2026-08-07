@@ -17,7 +17,6 @@ type Client struct {
 	bucketName  string
 }
 
-// NewClient initializes the MinIO storage client
 func NewClient() (*Client, error) {
 	endpoint := os.Getenv("STORAGE_ENDPOINT") // e.g., "localhost:9000"
 	accessKey := os.Getenv("STORAGE_ACCESS_KEY")
@@ -27,6 +26,12 @@ func NewClient() (*Client, error) {
 
 	if endpoint == "" {
 		endpoint = "localhost:9000"
+	}
+	if accessKey == "" {
+		accessKey = "minio_admin"
+	}
+	if secretKey == "" {
+		secretKey = "minio_password"
 	}
 	if bucketName == "" {
 		bucketName = "deployly-caches"
